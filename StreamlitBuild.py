@@ -106,6 +106,7 @@ def successful_bookings():
     ax.set_xlabel("\nVehicle Type")
     ax.set_ylabel("Success Rate\n")
     col1.pyplot(fig)
+    plt.close(fig)
     col1.write('\n')
 
     col2.write('**Different payment methods usage:**')
@@ -116,6 +117,7 @@ def successful_bookings():
     ax.set_xlabel("\nPayment Methods")
     ax.set_ylabel("Usage Count\n")
     col2.pyplot(fig)
+    plt.close(fig)
     
     
 
@@ -200,6 +202,7 @@ def Vehicle_Types():
     ax.set_ylim(0, max(table8['SUCCESS_RIDES']) * 1.2) 
     ax.legend(loc='upper left', bbox_to_anchor=(1.02, 1), title="Ride Status")
     st.pyplot(fig)
+    plt.close(fig)
     
 def Customer_Canceled():
     query_c_cancel = """ 
@@ -362,6 +365,7 @@ def Driver_Ratings():
     ax.set_xlabel('\nVehicle types')
     ax.set_ylabel('Count\n')
     col1.pyplot(fig)
+    plt.close(fig)
 
     fig, ax = plt.subplots()
     ax.bar(table17['Vehicle_Type'], table17['COUNT'])
@@ -372,6 +376,7 @@ def Driver_Ratings():
     ax.set_xlabel('\nVehicle types')
     ax.set_ylabel('Count\n')
     col2.pyplot(fig)
+    plt.close(fig)
     
     st.write('\n')
     st.write("Now it is clearly understandable which vehicle type have more number of Rating 3 and Rating 5. According to this we can implement solutions and improve the ratings")
@@ -432,6 +437,7 @@ def Payment_Methods():
     ax.set_xlabel('\nPayment Methods')
     ax.set_ylabel('Revenue Made(in millions)\n')
     st.pyplot(fig)
+    plt.close(fig)
 
 def Incomplete_Rides():
     query_totalincomp = """
