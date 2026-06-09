@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import mysql.connector
 connection = mysql.connector.connect(
-    host=st.secrets["DB_HOST"],                   # Database host
-    user=st.secrets["DB_USER"],                   # Database username
-    password=st.secrets["DB_PASSWORD"],           # Database password  
+    host="localhost",                   # Database host
+    user="root",                   # Database username
+    password="12345",           # Database password  
     allow_local_infile=True,
-    database=st.secrets["DB_NAME"]                # Database name
+    database="Project_OLA"                # Database name
 )
 
 cursor = connection.cursor() 
