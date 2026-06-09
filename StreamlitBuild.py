@@ -43,7 +43,7 @@ def successful_bookings():
     table1 = pd.DataFrame(data_result1, columns = column_data1)
     st.title("All Successful Bookings")
     st.write('\n')
-    st.table(table1)
+    st.dataframe(table1, use_container_width=True)
     st.write("These are the top five rows for successful bookings.")
     st.write('\n')
     st.subheader("Here is the detailed analysis for successful bookings...")
