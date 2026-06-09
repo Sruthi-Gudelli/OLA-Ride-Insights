@@ -32,7 +32,7 @@ def home_page():
 
 def successful_bookings():
     queryall = """
-    SELECT * FROM OLA_RidesData
+    SELECT * FROM ola_ridesdata
     WHERE Booking_Status = 'Success'
     LIMIT 5;
     """
@@ -51,7 +51,7 @@ def successful_bookings():
     
     query_vs = """
     SELECT COUNT(CASE WHEN Booking_Status = 'Success' THEN 1 END) AS Successful_Bookings, COUNT(CASE WHEN Booking_Status != 'Success' THEN 1 END) AS Unsuccessful_Bookings
-    FROM OLA_RidesDATA;
+    FROM ola_ridesdata;
     """
     cursor.execute(query_vs)
     data_result2 = cursor.fetchall()
@@ -60,7 +60,7 @@ def successful_bookings():
     
     query_rate = """
     SELECT Vehicle_Type, 100*COUNT(CASE WHEN Booking_Status = 'Success' THEN 1 END)/COUNT(*) AS SUCCESS_RATE
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     GROUP BY Vehicle_Type;
     """
     cursor.execute(query_rate)
@@ -70,7 +70,7 @@ def successful_bookings():
 
     query_time = """
     SELECT AVG(V_TAT) AS AVERAGE_V_TAT, AVG(C_TAT) AS AVERAGE_C_TAT
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE V_TAT != -1 AND C_TAT != -1; 
     """
     cursor.execute(query_time)
@@ -80,7 +80,7 @@ def successful_bookings():
 
     query_pay = """
     SELECT Payment_Method, COUNT(*) AS USAGE_COUNT 
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Payment_Method != 'Not Applicable'
     GROUP BY Payment_Method;
     """
@@ -141,7 +141,7 @@ def Vehicle_Types():
 
     query2 = """
         SELECT Vehicle_Type, AVG(Ride_Distance) AS Average_Ride_Distance
-        FROM OLA_RidesData
+        FROM ola_ridesdata
         WHERE Ride_Distance != 0 
         GROUP BY Vehicle_Type;
     """
@@ -162,7 +162,7 @@ def Vehicle_Types():
         COUNT(CASE WHEN Booking_Status = 'Canceled by Driver' THEN 1 END) AS DRIVER_CANCELED_RIDES,
         COUNT(CASE WHEN Booking_Status = 'Canceled by Customer' THEN 1 END) AS CUSTOMER_CANCELED_RIDES,
         COUNT(CASE WHEN Booking_Status = 'Driver Not Found' THEN 1 END) AS DRIVER_NOT_FOUND_RIDES
-        FROM OLA_RidesDATA
+        FROM ola_ridesdata
         WHERE Vehicle_Type = '{x}';
         """
         cursor.execute(query_count)
@@ -183,7 +183,7 @@ def Vehicle_Types():
     query_group = """
     SELECT Vehicle_Type, COUNT(CASE WHEN Booking_Status = 'Success' THEN 1 END) AS SUCCESS_RIDES, 
     COUNT(CASE WHEN Booking_Status != 'Success' THEN 1 END) AS UNSUCCESS_RIDES
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     GROUP BY Vehicle_Type;
     """
     cursor.execute(query_group)
@@ -204,7 +204,7 @@ def Vehicle_Types():
 def Customer_Canceled():
     query_c_cancel = """ 
     SELECT COUNT(*) AS Customer_Canceled_Rides
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Canceled by Customer'
     """
     cursor.execute(query_c_cancel)
@@ -219,7 +219,7 @@ def Customer_Canceled():
 
     query_reason1 = """ 
     SELECT Canceled_Rides_by_Customer AS REASON_FOR_CANCELING, COUNT(*) AS NO_OF_TIMES_CANCELED
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Canceled by Customer'
     GROUP BY Canceled_Rides_by_Customer;
     """
@@ -234,7 +234,7 @@ def Customer_Canceled():
 def Driver_Canceled():
     query_d_cancel = """ 
     SELECT COUNT(*) AS Driver_Canceled_Rides
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Canceled by Driver'
     """
     cursor.execute(query_d_cancel)
@@ -249,7 +249,7 @@ def Driver_Canceled():
 
     query_reason2 = """ 
     SELECT Canceled_Rides_by_Driver AS REASON_FOR_CANCELING, COUNT(*) AS NO_OF_TIMES_CANCELED
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Canceled by Driver'
     GROUP BY Canceled_Rides_by_Driver;
     """
@@ -264,7 +264,7 @@ def Driver_Canceled():
 def Top_Customers():
     query_cust = """ 
     SELECT Customer_ID, COUNT(*) AS No_Of_Rides
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     GROUP BY Customer_ID
     ORDER BY No_Of_Rides DESC
     LIMIT 5;
@@ -284,7 +284,7 @@ def Top_Customers():
     def Customer_Vehicle(customer):
         query_custv = f""" 
         SELECT Vehicle_Type, COUNT(*) AS No_Of_Times_Used
-        FROM OLA_RidesDATA
+        FROM ola_ridesdata
         WHERE Customer_ID = '{customer}'
         GROUP BY Customer_ID, Vehicle_Type
         ORDER BY No_Of_Times_Used DESC;
@@ -311,7 +311,7 @@ def Top_Customers():
 def Driver_Ratings():
     query_D_ratings = """ 
     SELECT Vehicle_Type, MAX(Driver_Ratings) AS Max_Rating, MIN(Driver_Ratings) AS Min_Rating, AVG(Driver_Ratings) AS Average_Rating
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Driver_Ratings != -1.0
     GROUP BY Vehicle_Type;
     """
@@ -330,7 +330,7 @@ def Driver_Ratings():
 
     query_3 = """ 
     SELECT Vehicle_Type, COUNT(*) AS COUNT 
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Driver_Ratings = 3.0
     GROUP BY Vehicle_Type
     ORDER BY COUNT DESC;
@@ -342,7 +342,7 @@ def Driver_Ratings():
 
     query_5 = """ 
     SELECT Vehicle_Type, COUNT(*) AS COUNT 
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Driver_Ratings = 5.0
     GROUP BY Vehicle_Type
     ORDER BY COUNT DESC;
@@ -379,7 +379,7 @@ def Driver_Ratings():
 def Customer_Ratings():
     query_C_ratings = """ 
     SELECT Vehicle_Type, AVG(Customer_Rating) AS Average_Rating
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Customer_Rating != -1.0
     GROUP BY Vehicle_Type;
     """
@@ -396,7 +396,7 @@ def Customer_Ratings():
 def Payment_Methods():
     query_pay = """
     SELECT Payment_Method, COUNT(*) AS USAGE_COUNT 
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Payment_Method != 'Not Applicable'
     GROUP BY Payment_Method;
     """
@@ -414,7 +414,7 @@ def Payment_Methods():
     st.subheader("Revenue made through each payment method")
     query_rev = """ 
     SELECT Payment_Method, SUM(Booking_Value) AS REVENUE_MADE 
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Payment_Method != 'Not Applicable' 
     GROUP BY Payment_Method;
     """
@@ -436,7 +436,7 @@ def Payment_Methods():
 def Incomplete_Rides():
     query_totalincomp = """
     SELECT COUNT(*)
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Incomplete_Rides = 'Yes';
     """
     cursor.execute(query_totalincomp)
@@ -449,7 +449,7 @@ def Incomplete_Rides():
     
     query_reasonincomp = """
     SELECT Incomplete_Rides_Reason, COUNT(*) AS COUNT
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Incomplete_Rides = 'Yes'
     GROUP BY Incomplete_Rides_Reason;
     """
@@ -465,7 +465,7 @@ def Incomplete_Rides():
 
     query_vehincomp = """ 
     SELECT Vehicle_Type, COUNT(*) AS Incomplete_Ride_Count
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Incomplete_Rides = 'Yes'
     GROUP BY Vehicle_Type
     ORDER BY Incomplete_Ride_Count DESC;
@@ -482,7 +482,7 @@ def Incomplete_Rides():
     def vehicle_reason(reason):
         query_vehreaincomp = f""" 
         SELECT Vehicle_Type, COUNT(*) AS Incomplete_Ride_Count
-        FROM OLA_RidesDATA
+        FROM ola_ridesdata
         WHERE Incomplete_Rides = 'Yes'AND Incomplete_Rides_Reason = '{reason}'
         GROUP BY Vehicle_Type
         ORDER BY Incomplete_Ride_Count DESC;
@@ -502,7 +502,7 @@ def Incomplete_Rides():
 def Revenue_Made():
     query_rcomp = """ 
     SELECT SUM(Booking_Value) AS Total_Booking_Value
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Incomplete_Rides = 'No';
     """
     cursor.execute(query_rcomp)
@@ -510,7 +510,7 @@ def Revenue_Made():
 
     query_rincomp = """ 
     SELECT SUM(Booking_Value) AS Total_Booking_Value
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Incomplete_Rides = 'Yes';
     """
     cursor.execute(query_rincomp)
@@ -526,7 +526,7 @@ def Revenue_Made():
     st.write("Lets see the total booking value for canceled rides")
     query_rcancel = """ 
     SELECT SUM(Booking_Value) AS Total_Booking_Value
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status != 'Success';
     """
     cursor.execute(query_rcancel)
@@ -537,7 +537,7 @@ def Revenue_Made():
 
     query_drivcancel = """ 
     SELECT SUM(Booking_Value) AS Total_Booking_Value
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Canceled by Driver';
     """
     cursor.execute(query_drivcancel)
@@ -545,7 +545,7 @@ def Revenue_Made():
 
     query_custcancel = """ 
     SELECT SUM(Booking_Value) AS Total_Booking_Value
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Canceled by Customer';
     """
     cursor.execute(query_custcancel)
@@ -553,7 +553,7 @@ def Revenue_Made():
 
     query_drinotfound = """ 
     SELECT SUM(Booking_Value) AS Total_Booking_Value
-    FROM OLA_RidesDATA
+    FROM ola_ridesdata
     WHERE Booking_Status = 'Driver Not Found';
     """
     cursor.execute(query_drinotfound)
