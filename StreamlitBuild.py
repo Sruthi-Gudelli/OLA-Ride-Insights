@@ -1,14 +1,18 @@
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 import mysql.connector
+db_host = os.environ.get("DB_HOST", "localhost")
+db_user = os.environ.get("DB_USER", "root")          
+db_pass = os.environ.get("DB_PASSWORD", 12345)  
+db_name = os.environ.get("DB_NAME", "Project_OLA")
 connection = mysql.connector.connect(
-    host="localhost",                   # Database host
-    user="root",                   # Database username
-    password="12345",           # Database password  
-    allow_local_infile=True,
-    database="Project_OLA"                # Database name
+    host=db_host,                   # Database host
+    user=db_user,                   # Database username
+    password=db_pass,               # Database password  
+    database=db_name                # Database name
 )
 
 cursor = connection.cursor() 
