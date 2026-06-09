@@ -17,18 +17,18 @@ connection = mysql.connector.connect(
 
 cursor = connection.cursor() 
 
-st.logo('C:/Users/HP/Downloads/ola-cabs-logo-svgrepo-com.jpg', size = 'large')
+st.logo('ola-cabs-logo-svgrepo-com.jpg', size = 'large')
 
 def home_page():
     tab1, tab2 = st.tabs(['Home', 'Dashboard'])
     tab1.title("Ola Ride Insights")
     tab1.write('\n')
-    tab1.image('C:/Users/HP/Downloads/OLA Imagee.png')
+    tab1.image('OLA Imagee.png')
     tab1.write('\n')
     tab1.write("OLA Ride Analysis provides critical visibility into ride-hailing data to figure out trip cancellation patterns, driver ratings and revenue distributions. We perform this analysis to identify common problems and reduce customer wait times. By evaluating passenger feedback and payment preferences, we can see what annoys riders and make the app better. Ultimately, this research is conducted to transform raw telemetry into data-driven strategies that maximize company profitability while elevating overall user satisfaction.")
     tab1.write('\n')
     tab1.write("For detailed analysis 📈, navigate through each analysis on the left..")
-    tab2.image('D:/VSCODE/Project_OLA/OLA Rides Dashboard.png')
+    tab2.image('OLA Rides Dashboard.png')
 
 def successful_bookings():
     queryall = """
