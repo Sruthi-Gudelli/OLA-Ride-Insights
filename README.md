@@ -14,7 +14,7 @@ We also read customer reviews and check how people like to pay to see what annoy
 ## 🔗 Live Application Link
 
 You can interact with the live, cloud-deployed app here:
-👉 **[Launch Live OLA Ride Analytics App]([https://ola-ride-insights-ziix.onrender.com])**
+👉 **[Launch Live OLA Ride Analytics App](https://ola-ride-insights-ziix.onrender.com)**
 
 *(Note: If the application has been idle, it may take about 1 minute to wake up on the free tier hosting environment).*
 
